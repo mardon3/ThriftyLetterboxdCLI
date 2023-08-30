@@ -32,14 +32,14 @@ To use the ThriftyLetterboxd CLI, follow these steps:
    - On Windows:
 
      ```sh
-     .\ThriftyLetterboxdCLI.exe stats <LetterboxdUsername>
-     .\ThriftyLetterboxdCLI.exe random <LetterboxdUsername> [genre]
+     .\ThriftyLetterboxd stats <LetterboxdUsername>
+     .\ThriftyLetterboxd random <LetterboxdUsername> [genre]
      ```
 
    - On Linux/macOS:
      ```sh
-     ./ThriftyLetterboxdCLI stats <LetterboxdUsername>
-     ./ThriftyLetterboxdCLI random <LetterboxdUsername> [genre]
+     ./ThriftyLetterboxd stats <LetterboxdUsername>
+     ./ThriftyLetterboxd random <LetterboxdUsername> [genre]
      ```
 
    Replace `<LetterboxdUsername>` with the Letterboxd username you want to gather stats for, and `[genre]` with an optional genre keyword.
