@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/gocolly/colly v1.2.0
+	github.com/schollz/progressbar v1.0.0
 	github.com/urfave/cli/v2 v2.25.7
 )
 

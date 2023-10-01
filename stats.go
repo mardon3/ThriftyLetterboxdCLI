@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/gocolly/colly"
+	"github.com/schollz/progressbar"
 	"github.com/urfave/cli/v2"
 )
 
@@ -202,6 +203,9 @@ func individualFilmPageData() {
 		fmt.Println("Error:", err)
 	})
 
+	tasks := len(films)
+	bar := progressbar.New(tasks)
+	fmt.Println("\nGathering data on watched films...")
 	for _, film := range films {
 		err := c.Visit(film.pageURL)
 
@@ -209,6 +213,7 @@ func individualFilmPageData() {
 			fmt.Println("Error during visit:", err)
 		}
 
+		bar.Add(1)
 		filmCounter++
 	}
 
@@ -216,7 +221,7 @@ func individualFilmPageData() {
 	totalWatchtime := sumOfSlice[int](films, "length")
 	averageWatchtime := totalWatchtime / amountOfFilmsWithLength
 
-	fmt.Println("\nTotal watchtime:", minutesToDaysHoursMinutes(totalWatchtime))
+	fmt.Println("\n\nTotal watchtime:", minutesToDaysHoursMinutes(totalWatchtime))
 	fmt.Println("Average watchtime:", minutesToHoursMinutes(averageWatchtime))
 
 	// Check if film had a letterboxd rating
