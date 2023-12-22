@@ -169,6 +169,11 @@ func individualFilmPageData() {
 		text := strings.TrimSpace(h.Text)
 		// Find index of "m" from "mins"
 		firstM := strings.Index(text, "m")
+		// If "m" is not found, append film title to filmsWithNoLengthProvided and return
+		if firstM == -1 {
+			filmsWithNoLengthProvided = append(filmsWithNoLengthProvided, films[filmCounter].title)
+			return
+		}
 		// Slice text to first "m", to get film length
 		filmLengthString := strings.TrimSpace(text[0:firstM])
 		// Convert film length from string to int if length is valid
