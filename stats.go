@@ -129,20 +129,24 @@ func watchedFilmsPageData() {
 
 	c := colly.NewCollector()
 
-	c.OnHTML("li.poster-container", func(h *colly.HTMLElement) {
-		rating, err := symboltoRating(h.Text)
+	c.OnHTML("li.griditem", func(h *colly.HTMLElement) {
+		filmName := h.ChildAttr("div.react-component", "data-item-name")
+		link := h.ChildAttr("div.react-component", "data-item-link")
+		ratingStr := h.ChildText("p.poster-viewingdata span.rating")
 		
-		if (err != nil) {
-			fmt.Println("Excluded:", h.ChildAttr("img", "alt"))
+		rating, err := symboltoRating(ratingStr)
+		
+		if err != nil {
+			fmt.Println("Excluded:", filmName)
 			filmsWithoutUserRatingCounter++
 		}
 
-		filmPage := h.Request.AbsoluteURL("/film/" + h.ChildAttr("div", "data-film-slug"))
+		filmPage := h.Request.AbsoluteURL(link)
 
 		films = append(films, film{
 			userRating: rating,
 			pageURL: filmPage,
-			title: h.ChildAttr("img", "alt"),
+			title: filmName,
 		})
 	})
 
